@@ -37,32 +37,34 @@ def __get_main_units(html: str) -> list[Unit]:
 
 @beartype
 def __get_unit_htmls(html: str) -> list[str]:
-    # FIXME extract to function
-    htmls = []
+    return __separate_into_units(html, __get_mainpage_bloc_idxs(html))
+
+
+@beartype
+def __get_mainpage_bloc_idxs(html: str) -> list[tuple[int, int]]:
+    res = []
     start = html.find("<h2")
     end = html.find("</h2", start + 1)
     while -1 not in {start, end}:
-        htmls.append((start, end))
+        res.append((start, end))
         start = html.find("<h2", end + 1)
         end = html.find("</h2", start + 1)
+    return res
 
-    # FIXME extract to function
-    results = []
-    unit_start = -1
-    unit_end = -1
-    for start, end in htmls:
-        # FIXME this nesting is ugly jesus
-        # FIXME do a better check for unit when you stop being lazy
+
+@beartype
+def __separate_into_units(html: str, bloc_idxs: list[tuple[int, int]]) -> list[str]:
+    res = []
+    unit_start, unit_end = [-1] * 2
+    for start, end in bloc_idxs:
         if "Unit" in html[start:end]:
             if -1 not in [unit_start, unit_end]:
-                results.append(html[unit_start:unit_end])
+                res.append(html[unit_start:unit_end])
             unit_start, unit_end = start, end
             continue
         if -1 not in [unit_start, unit_end]:
             unit_end = end
-
-    # return htmls
-    return [*results, html[unit_start:unit_end]]
+    return [*res, html[unit_start:unit_end]]
 
 
 @beartype
