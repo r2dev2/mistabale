@@ -5,9 +5,7 @@ from pathlib import Path
 import requests
 from beartype import beartype
 from bs4 import BeautifulSoup
-
 from models import EconData, ImageLink, Unit
-
 
 __cache_root = Path(__file__).parent / "../balesite"
 __cache_root.mkdir(exist_ok=True)
@@ -16,7 +14,7 @@ __welcome_selector = "#comp-jyz8knnk"
 
 
 @beartype
-def get_econ_main_data(cached: bool=True) -> EconData:
+def get_econ_main_data(cached: bool = True) -> EconData:
     html = __get_site(__economics_url)
     return EconData(welcome=__get_main_welcome(html), units=__get_main_units(html))
 
@@ -73,7 +71,7 @@ def __correct_text(text: str) -> str:
 
 
 @beartype
-def __get_site(url: str, cached: bool=True) -> str:
+def __get_site(url: str, cached: bool = True) -> str:
     cache_file = __cache_root / b64encode(url.encode()).decode()
     if cached and cache_file.exists():
         return cache_file.read_text()
