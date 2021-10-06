@@ -44,25 +44,27 @@ def __get_unit_htmls(html: str) -> list[str]:
     start = html.find("<h2")
     end = html.find("</h2", start + 1)
     while -1 not in {start, end}:
-        htmls.append(html[start:end])
+        htmls.append((start, end))
         start = html.find("<h2", end + 1)
         end = html.find("</h2", start + 1)
 
     # FIXME extract to function
     results = []
-    buf = []
-    for bloc in htmls:
+    unit_start = -1
+    unit_end = -1
+    for start, end in htmls:
         # FIXME this nesting is ugly jesus
         # FIXME do a better check for unit when you stop being lazy
-        if "Unit" in bloc:
-            if buf:
-                results.append("\n".join(buf))
-            buf = [bloc]
+        if "Unit" in html[start:end]:
+            if -1 not in [unit_start, unit_end]:
+                results.append(html[unit_start:unit_end])
+            unit_start, unit_end = start, end
             continue
-        if "Unit" in "".join(buf[:1]):
-            buf.append(bloc)
+        if -1 not in [unit_start, unit_end]:
+            unit_end = end
 
-    return [*results, "\n".join(buf)]
+    # return htmls
+    return [*results, html[unit_start:unit_end]]
 
 
 @beartype
