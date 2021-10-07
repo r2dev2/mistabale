@@ -6,12 +6,16 @@ class ImageLink(BaseModel):
     img_src: str
 
 
+class TextLink(BaseModel):
+    url: str
+    text: str
+
+
 class Unit(BaseModel):
     title: str
     description: str
-    lectures: list[ImageLink]
-    video_content: list[ImageLink]
-    additional_resources: list[str]
+    resources: list[ImageLink]
+    documents: list[TextLink]
 
 
 class EconData(BaseModel):
