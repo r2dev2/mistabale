@@ -17,6 +17,7 @@ __cache_root.mkdir(exist_ok=True)
 __economics_url = "https://www.mistabale.com/economics"
 __welcome_selector = "#comp-jyz8knnk"
 __img_link_selector = "a[data-testid=linkElement]"
+__text_link_selector = "p > a"
 __unit_divider = re.compile(r"Unit \d")
 __width_finder = re.compile(r"w_(\d+)")
 __height_finder = re.compile(r"h_(\d+)")
@@ -37,12 +38,7 @@ def __get_main_welcome(html: str) -> str:
 
 @beartype
 def __get_main_units(html: str) -> list[Unit]:
-    for unit in map(__get_unit_from_html, __get_unit_htmls(html)):
-        print(unit)
-    # for html in htmls:
-    #     print(BeautifulSoup(html, "html.parser").text)
-    #     print("\n\n")
-    return []
+    return [*map(__get_unit_from_html, __get_unit_htmls(html))]
 
 
 @beartype
@@ -52,7 +48,7 @@ def __get_unit_from_html(html: str) -> Unit:
         title=__correct_text(soup.find("h2").text),
         description=__correct_text(soup.find("p").text),
         resources=[*__get_img_links(soup)],
-        documents=[],
+        documents=[*__get_text_links(soup)],
     )
 
 
@@ -89,10 +85,14 @@ def __separate_into_units(
 
 @beartype
 def __get_img_links(soup: BeautifulSoup) -> Iterable[ImageLink]:
-    for a in [*soup.select(__img_link_selector)]:
-        url = a["href"]
-        img_src = __increase_img_res(a.find("img")["src"])
-        yield ImageLink(url=url, img_src=img_src)
+    for a in soup.select(__img_link_selector):
+        yield ImageLink(url=a["href"], img_src=__increase_img_res(a.find("img")["src"]))
+
+
+@beartype
+def __get_text_links(soup: BeautifulSoup) -> Iterable[TextLink]:
+    for a in soup.select(__text_link_selector):
+        yield TextLink(url=a["href"], text=a.text)
 
 
 @beartype

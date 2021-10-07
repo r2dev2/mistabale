@@ -13,7 +13,6 @@ def main() -> None:
     args = parser.parse_args()
 
     data = get_econ_main_data(args.cached)
-    print(data)
 
 
 if __name__ == "__main__":
