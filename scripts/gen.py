@@ -1,3 +1,4 @@
+import shutil
 from argparse import ArgumentParser
 from pathlib import Path
 
@@ -25,6 +26,8 @@ def main() -> None:
     for i, unit in enumerate(data.units, 1):
         with open(dist / f"Unit-{i}.html", "w+") as fout:
             print(render_unit_page(unit), file=fout)
+
+    shutil.copy(dist / "../index.css", dist / "index.css")
 
 
 if __name__ == "__main__":
