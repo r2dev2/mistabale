@@ -1,6 +1,8 @@
+from beartype import beartype
 from models import EconData, ImageLink, TextLink, Unit
 
 
+@beartype
 def render_econ_data(data: EconData) -> str:
     return f"""
 <!DOCTYPE html>
@@ -22,6 +24,7 @@ def render_econ_data(data: EconData) -> str:
 """
 
 
+@beartype
 def render_unit_page(unit: Unit) -> str:
     return f"""
 <!DOCTYPE html>
@@ -38,7 +41,7 @@ def render_unit_page(unit: Unit) -> str:
     <section>
         <h2>Documents</h2>
         <ul id="documents">
-            {"".join(map(render_text_link, unit.documents))}
+            {"".join(map(render_text_links, unit.documents))}
         </ul>
     </section>
     <section>
@@ -52,6 +55,7 @@ def render_unit_page(unit: Unit) -> str:
 """
 
 
+@beartype
 def render_img_link(link: ImageLink) -> str:
     return f"""
 <div class="resource">
@@ -60,7 +64,11 @@ def render_img_link(link: ImageLink) -> str:
 """
 
 
-def render_text_link(link: TextLink) -> str:
+@beartype
+def render_text_links(links: list[TextLink]) -> str:
+    rendered_links = ",&nbsp;&nbsp;&nbsp;&nbsp;".join(
+        f'<a href="{link.url}">{link.text}</a>' for link in links
+    )
     return f"""
-<li class="document"><a href="{link.url}">{link.text}</a></li>
+<li class="document">{rendered_links}</a></li>
 """

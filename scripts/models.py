@@ -15,7 +15,7 @@ class Unit(BaseModel):
     title: str
     description: str
     resources: list[ImageLink]
-    documents: list[TextLink]
+    documents: list[list[TextLink]]
 
 
 class EconData(BaseModel):

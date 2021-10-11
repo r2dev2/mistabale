@@ -87,9 +87,12 @@ def __get_img_links(soup: BeautifulSoup) -> Iterable[ImageLink]:
 
 
 @beartype
-def __get_text_links(soup: BeautifulSoup) -> Iterable[TextLink]:
-    for a in soup.select(__text_link_selector):
-        yield TextLink(url=a["href"], text=a.text)
+def __get_text_links(soup: BeautifulSoup) -> Iterable[list[TextLink]]:
+    return (
+        [TextLink(url=a["href"], text=a.text) for a in p.select("a")]
+        for p in soup.select("p")
+        if p.select("a")
+    )
 
 
 @beartype
