@@ -1,3 +1,5 @@
+from typing import List
+
 from beartype import beartype
 from models import EconData, ImageLink, TextLink, Unit
 
@@ -80,7 +82,7 @@ def render_img_link(link: ImageLink) -> str:
 
 
 @beartype
-def render_text_links(links: list[TextLink]) -> str:
+def render_text_links(links: List[TextLink]) -> str:
     rendered_links = ",&nbsp;&nbsp;&nbsp;&nbsp;".join(
         f'<a href="{link.url}">{link.text}</a>' for link in links
     )

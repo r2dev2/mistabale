@@ -3,7 +3,7 @@ import warnings
 from base64 import b64encode
 from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, List, Tuple
 
 import requests
 from beartype import beartype
@@ -37,7 +37,7 @@ def __get_main_welcome(html: str) -> str:
 
 
 @beartype
-def __get_main_units(html: str) -> list[Unit]:
+def __get_main_units(html: str) -> List[Unit]:
     return [*map(__get_unit_from_html, __get_unit_htmls(html))]
 
 
@@ -53,12 +53,12 @@ def __get_unit_from_html(html: str) -> Unit:
 
 
 @beartype
-def __get_unit_htmls(html: str) -> list[str]:
+def __get_unit_htmls(html: str) -> List[str]:
     return [*__separate_into_units(html, __get_mainpage_bloc_idxs(html))]
 
 
 @beartype
-def __get_mainpage_bloc_idxs(html: str) -> Iterable[tuple[int, int]]:
+def __get_mainpage_bloc_idxs(html: str) -> Iterable[Tuple[int, int]]:
     start = html.find("<h2")
     end = html.find("</h2", start + 1)
     while -1 not in {start, end}:
@@ -69,7 +69,7 @@ def __get_mainpage_bloc_idxs(html: str) -> Iterable[tuple[int, int]]:
 
 @beartype
 def __separate_into_units(
-    html: str, bloc_idxs: Iterable[tuple[int, int]]
+    html: str, bloc_idxs: Iterable[Tuple[int, int]]
 ) -> Iterable[str]:
     unit_start = -1
     for start, end in bloc_idxs:
@@ -87,7 +87,7 @@ def __get_img_links(soup: BeautifulSoup) -> Iterable[ImageLink]:
 
 
 @beartype
-def __get_text_links(soup: BeautifulSoup) -> Iterable[list[TextLink]]:
+def __get_text_links(soup: BeautifulSoup) -> Iterable[List[TextLink]]:
     return (
         [TextLink(url=a["href"], text=a.text) for a in p.select("a")]
         for p in soup.select("p")

@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel
 
 
@@ -14,10 +16,10 @@ class TextLink(BaseModel):
 class Unit(BaseModel):
     title: str
     description: str
-    resources: list[ImageLink]
-    documents: list[list[TextLink]]
+    resources: List[ImageLink]
+    documents: List[List[TextLink]]
 
 
 class EconData(BaseModel):
     welcome: str
-    units: list[Unit]
+    units: List[Unit]
