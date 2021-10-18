@@ -1,0 +1,41 @@
+body {
+  font-family: Arial,sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,a:visited {
+  color: blue;
+}
+
+a:hover {
+  color: red;
+}
+
+ul,ol {
+  list-style: circle;
+  padding-left: 1.5rem;
+}
+
+#resources {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.resource {
+  transition: .2s ease-in-out;
+}
+
+.resource:hover {
+  opacity: 0.5;
+  transform: scale(1.05);
+}
+
+a > img {
+  border-style: solid;
+  border-color: blue;
+}
