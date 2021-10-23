@@ -52,8 +52,10 @@ def render_unit_page(unit: Unit) -> str:
     <meta charset="UTF-8">
     <title>{unit.title} - Mistabale</title>
     <link rel="stylesheet" href="./index.css" />
+    <script defer src="./index.js"></script>
 </head>
 <body>
+    <div class="cursor"></div>
     <h1>{unit.title}</h1>
     <p>{unit.description}</p>
     <section>

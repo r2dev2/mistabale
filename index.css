@@ -34,7 +34,7 @@ ul,ol {
   transition: .2s ease-in-out;
 }
 
-.resource:hover {
+.resource:hover,.resource.focussed {
   opacity: 0.5;
   transform: scale(1.05);
 }
@@ -49,7 +49,7 @@ a > img {
   position: absolute;
   z-index: 9;
   width: 30px; /* yea I hardcoded the values :sunglasses: */
-  height: 35px; /* sigma male gorillionare grindset */
+  height: 37px; /* sigma male gorillionare grindset */
   top: 0px;
   left: 0px;
   background-image: url(./img/baleface-min.png);
@@ -61,5 +61,4 @@ a > img {
 
 .cursor.focussed {
   background-image: url(./img/balepog-min.png);
-}
 }
