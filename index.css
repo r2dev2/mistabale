@@ -1,4 +1,8 @@
-body {
+* {
+  cursor: none;
+}
+
+html {
   font-family: Arial,sans-serif;
 }
 
@@ -10,7 +14,7 @@ a:link,a:visited {
   color: blue;
 }
 
-a:hover {
+a:hover,a.focussed {
   color: red;
 }
 
@@ -38,4 +42,24 @@ ul,ol {
 a > img {
   border-style: solid;
   border-color: blue;
+}
+
+.cursor {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  width: 30px; /* yea I hardcoded the values :sunglasses: */
+  height: 35px; /* sigma male gorillionare grindset */
+  top: 0px;
+  left: 0px;
+  background-image: url(./img/baleface-min.png);
+}
+
+.cursor.active {
+  display: block;
+}
+
+.cursor.focussed {
+  background-image: url(./img/balepog-min.png);
+}
 }
