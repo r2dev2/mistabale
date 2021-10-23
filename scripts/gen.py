@@ -1,5 +1,6 @@
 import shutil
 from argparse import ArgumentParser
+from contextlib import suppress
 from pathlib import Path
 
 from bale import get_econ_main_data
@@ -28,6 +29,9 @@ def main() -> None:
             print(render_unit_page(unit), file=fout)
 
     shutil.copy(dist / "../index.css", dist / "index.css")
+    shutil.copy(dist / "../index.js", dist / "index.js")
+    with suppress(FileExistsError):
+        shutil.copytree(dist / "../img", dist / "img")
 
 
 if __name__ == "__main__":

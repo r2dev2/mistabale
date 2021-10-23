@@ -19,9 +19,10 @@ def render_econ_data(data: EconData) -> str:
     <link rel="stylesheet" href="./index.css" />
     <link rel="prefetch" href="{__quartery_reports}" />
     <link rel="prefetch" href="{__case_studies}" />
-    {"".join(f'<link rel="prefetch" href="./Unit-{i}.html" />' for i in range(1, len(data.units) + 1))}
+    <script defer src="./index.js"></script>
 </head>
 <body>
+    <div class="cursor"></div>
     <h1>Economics - Mistabale</h1>
     <section>
         <h2>General</h2>
