@@ -20,6 +20,7 @@ I run the following commands in two shells to make development easier
 ## Features
 
 - [x] Parse and generate site for [main page](https://www.mistabale.com/economics)
+- [ ] Superior bale cursor
 - [ ] Parse and generate site for [quarterly reports](https://www.mistabale.com/quarterly-reports)
 - [ ] Parse and generate site for [case studies](https://www.mistabale.com/case-studies)
 - [ ] Parse and generate site for [case studies on the radio](https://www.mistabale.com/case-studies)
