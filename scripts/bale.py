@@ -109,7 +109,7 @@ def __increase_img_res(src: str) -> str:
 
 @beartype
 def __correct_text(text: str) -> str:
-    return text.replace("\xa0", "").replace("\u200b", "").strip()
+    return text.replace("\xa0 ", " ").replace("\u200b", "").strip()
 
 
 @beartype
