@@ -42,3 +42,5 @@ document.querySelectorAll('a,.resource').forEach(a => {
   on(a, 'contextmenu', () => { }, () => { });
   on(a, 'click', navigateTo, () => { });
 });
+
+document.body.classList.add('js'); // handle noscripters
