@@ -17,8 +17,6 @@ def render_econ_data(data: EconData) -> str:
     <meta charset="UTF-8">
     <title>Economics - Mistabale</title>
     <link rel="stylesheet" href="./index.css" />
-    <link rel="prefetch" href="{__quartery_reports}" />
-    <link rel="prefetch" href="{__case_studies}" />
     <script defer src="./index.js"></script>
 </head>
 <body>
