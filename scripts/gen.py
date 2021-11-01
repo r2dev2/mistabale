@@ -30,6 +30,7 @@ def main() -> None:
 
     shutil.copy(dist / "../index.css", dist / "index.css")
     shutil.copy(dist / "../index.js", dist / "index.js")
+    shutil.copy(dist / "../favicon.ico", dist / "favicon.ico")
     with suppress(FileExistsError):
         shutil.copytree(dist / "../img", dist / "img")
 
